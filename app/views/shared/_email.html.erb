@@ -1,0 +1,6 @@
+<div class="control has-icons-left">
+  <%= f.email_field :email, autofocus: autofocus, autocomplete: "email", placeholder: "Email",class: "input #{'is-danger' unless resource.errors.messages[:email].empty?}" %>
+  <span class="icon is-small is-left">
+    <i class="fas fa-envelope"></i>
+  </span>
+</div>

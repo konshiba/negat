@@ -1,0 +1,13 @@
+<div class="main-container">
+
+  <% if user_signed_in? %>
+    <div class="tweet-container">
+      <%= render "shared/tweet", tweet: @tweet %>
+    </div>
+  <% end %>
+
+  <div class="tweets-container">
+    <%= render "shared/tweets", tweets: @tweets %>
+  </div>
+
+</div>

@@ -1,0 +1,3 @@
+$("#tweet_<%= results[:destroyed_tweet_id] %>").remove();
+
+$('#offset').val(parseInt($('#offset').val()) - parseInt(<%= results[:offset_minus] %>))

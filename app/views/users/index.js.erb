@@ -1,0 +1,11 @@
+<% results[:users].each do |user| %>
+  $(".tweets").append(<%= j(render "shared/users_row", user: user) %>)
+<% end %>
+
+$('#offset').val(parseInt($('#offset').val()) + parseInt(<%= results[:users].length %>));
+
+<% if results[:is_requestable] %>
+  $("#more-users").prop("disabled", false);
+<% else results[:is_requestable] %>
+  $("#more-users").prop("disabled", true)
+<% end %>

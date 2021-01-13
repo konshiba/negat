@@ -1,0 +1,31 @@
+<div class="main-container">
+  <div class="main-container-title">
+    <h1>ユーザー情報</h1>
+  </div>
+  <div class="main-fields">
+    <%= form_for(@user) do |f| %>
+      <div class="field">
+        <label for="">ニックネーム</label>
+        <p><%= f.text_field :name, class: "input" %></p>
+      </div>
+      <div class="field">
+        <label for="">メールアドレス</label>
+        <%= render "shared/email", resource: @user, f: f, autofocus: false %>
+      </div>
+      <div class="field">
+        <label for="">自己紹介</label>
+        <p><%= f.text_area :introduction, class: "textarea" %></p>
+      </div>
+      <div class="field">
+        <label for="">プロフィール画像</label>
+        <p><%= f.attachment_field :profile_image %></p>
+      </div>
+      <div class="field">
+        <div class="control">
+          <%= link_to "キャンセル", user_path(@user.id, user_id: @user.id), class: "button is-white main-botton" %>
+          <%= f.submit "保存", class: "button is-primary main-botton" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

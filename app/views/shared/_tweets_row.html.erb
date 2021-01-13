@@ -1,0 +1,31 @@
+<div class="tweet" id="tweet_<%= tweet.id %>">
+  <div class="user clearfix">
+    <%= link_to user_path(tweet.user_id, user_id: tweet.user_id), title: "ユーザ画面" do %>
+      <%= attachment_image_tag tweet.user, :profile_image, :fill, 30, 30, class: "profile-image", format: 'jpeg', fallback: "no_image.png", size: "30x30" %>
+      <span><%= tweet.user.name %></span>
+    <% end %>
+    <div class="tweet_info">
+      <ul>
+        <li><%= tweet.created_at.strftime("%Y-%m-%d %H:%M") %></li>
+        <% if user_signed_in? && current_user.id == tweet.user_id %>
+          <li>
+            <%= link_to tweet_path(tweet.id), method: :delete, remote: true do %>
+              <i class="far fa-trash-alt"></i>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+      <span>
+    </div>
+  </div>
+  <div class="tweet-content clearfix">
+    <%= simple_format(tweet.content) %>
+    <div class="tweet_images">
+      <% tweet.tweet_images.each do |tweet_image| %>
+        <div class="tweet_image">
+          <%= attachment_image_tag tweet_image, :image, :fill, 120, 120, format: 'jpeg' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

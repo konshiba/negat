@@ -1,0 +1,33 @@
+<div class="tweets">
+  <% tweets.each do |tweet| %>
+    <%= render "shared/tweets_row", tweet: tweet %>
+  <% end %>
+</div>
+<div>
+  <% if user_signed_in? %>
+    <%= form_tag tweets_more_path, method: :get, remote: true do %>
+      <div class="field">
+        <div class="control">
+          <%= hidden_field_tag :search, params[:search] %>
+          <%= hidden_field_tag :offset, params[:offset], value: tweets.length %>
+          <%= hidden_field_tag :user_id, params[:user_id] %>
+          <%= submit_tag "もっと見る", class: "button is-medium is-fullwidth", id: "more-tweets", 'data-disable-with' => false, data: { disable_with: "読込中..." } %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<script type="text/javascript">
+  var progress = false;
+  $(window).bind("scroll", function () {
+    var scrollHeight = $(document).height();
+    var scrollPosition = $(window).height() + $(window).scrollTop();
+    if ( (scrollHeight - scrollPosition) / scrollHeight <= 0.30) {
+      if (progress) return;
+      progress = true;
+      $('#more-tweets').trigger('click');
+      $('#more-tweets').prop('disabled', true);
+    }
+    progress = false;
+  });
+</script>

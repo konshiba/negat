@@ -1,0 +1,39 @@
+<div class="main-fields">
+  <%= form_with model: tweet do |f| %>
+
+    <div class="field">
+      <%= f.text_area :content, placeholder: "ツイート", disabled: !user_signed_in?, class: "textarea #{'is-danger' unless tweet.errors.messages[:content].empty?}" %>
+    </div>
+
+    <div class="field" class="">
+      <div class="file">
+        <label for="" class="file-label">
+          <%= f.attachment_field :tweet_images_images, multiple: true, class: "file-input file-image" %>
+          <i class="fas fa-images"></i>
+        </label>
+      </div>
+    </div>
+    
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf8dpAmP0QhWmCePm60M9rf2kzvqhmJSuFVccS0Qnn_kXFgbQ/viewform?embedded=true" width="590" height="1227" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+    <div class="field image-preview-field"></div>
+
+    <div class="field is-grouped is-grouped-right">
+      <%= f.submit "ツイートする", class: "button is-primary main-botton", disabled: !user_signed_in? %>
+    </div>
+  <% end %>
+</div>
+<script type="text/javascript">
+  $(function(){
+    $('.file-image').change(function(){
+      $('.image-preview-field').html("");
+      for (var i = 0; i < $('input[type="file"]').prop('files').length; i++) {
+        var fileReader = new FileReader();
+        fileReader.onload = function(e) {
+          var html = `<img src="${e.target.result}" width="120" height="120" style="margin-left: 5px;">`
+          $('.image-preview-field').append(html);
+        }
+        fileReader.readAsDataURL($('input[type="file"]').prop('files')[i]);
+      }
+    });
+  });
+</script>

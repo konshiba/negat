@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Negat3</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= favicon_link_tag('favicon.ico') %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <header id="header" class="">
+    <div class="container">
+      <%= link_to home_path, title: "Home", class: "top" do %>
+        <i class="fas fa-home"></i>
+      <% end %>
+      <nav>
+        <ul>
+          <% if user_signed_in? %>
+            <li>
+              <%= form_tag searches_path, method: :get, local: true do %>
+                <div class="field has-addons">
+                  <%= hidden_field_tag :search_type, params[:search_type] %>
+                  <div class="control">
+                    <%= text_field_tag :search, params[:search], class: "input", placeholder: "Find tweets" %>
+                  </div>
+                  <div class="control">
+                    <%= submit_tag "検索", style: "display: none;" %>
+                  </div>
+                </div>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to user_path(current_user.id, user_id: current_user.id), title: "ユーザ画面" do %>
+                <%= attachment_image_tag current_user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.png", size: "50x60" %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to destroy_user_session_path, title: "ログアウト", method: :delete do %>
+                <i class="fas fa-sign-out-alt"></i>
+              <% end %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to new_user_session_path, title: "ログイン" do %>
+                <i class="fas fa-sign-in-alt"></i>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_user_registration_path, title: "アカウント作成" do %>
+                <i class="fas fa-user-plus"></i>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <body>
+    <div class="main-container">
+      <div class="notice-container">
+        <%= render "shared/notice", flash: flash %>
+      </div>
+    </div>
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+<% unless results[:flash].nil? %>
+  $(".notice-container").html('')
+  $(".notice-container").html('<%=j render "shared/notice", flash: results[:flash] %>')
+<% end %>
+
+<% unless results[:tweet].nil? %>
+  $(".tweet-container").html('')
+  $(".tweet-container").html('<%=j render "shared/tweet", tweet: results[:tweet] %>')
+<% end %>
+
+<% unless results[:tweets].nil? %>
+  $(".tweets-container").html('')
+  $(".tweets-container").html('<%=j render "shared/tweets", tweets: results[:tweets] %>')
+<% end %>

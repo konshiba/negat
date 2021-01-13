@@ -1,0 +1,27 @@
+<div class="main-container">
+  <div class="main-container-title">
+    <h2>ログイン</h2>
+  </div>
+  <div class="main-fields">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= render "shared/email", resource: resource, f: f, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <div class="control has-icons-left">
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", class: "input #{'is-danger' unless resource.errors.messages[:password].empty?}" %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "ログイン", class: "button is-primary main-botton" %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= render "users/shared/links" %>
+</div>
